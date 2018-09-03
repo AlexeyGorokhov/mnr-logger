@@ -1,0 +1,42 @@
+{
+  "name": "mnr-logger",
+  "version": "1.0.0",
+  "description": "Opinionated wrapper around winston logging library",
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/semistandard --verbose | ./node_modules/.bin/snazzy && ./node_modules/.bin/tape 'test/unit/**/*.test.js' | ./node_modules/.bin/tap-summary",
+    "test:integration": "./node_modules/.bin/tape 'test/integration/**/*.test.js' | ./node_modules/.bin/tap-summary"
+  },
+  "author": {
+    "name": "Alexey Gorokhov",
+    "email": "alexey.gorokhov@icloud.com",
+    "url": ""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "proxyquire": "^2.1.0",
+    "semistandard": "^12.0.0",
+    "sinon": "^6.1.5",
+    "snazzy": "^8.0.0",
+    "tap-summary": "^4.0.0",
+    "tape": "^4.4.0"
+  },
+  "keywords": [
+    "logger",
+    "winston"
+  ],
+  "homepage": "https://github.com/AlexeyGorokhov/mnr-logger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexeyGorokhov/mnr-logger"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexeyGorokhov/mnr-logger/issues"
+  }
+}
