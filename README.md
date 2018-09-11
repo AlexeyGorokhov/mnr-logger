@@ -1,29 +1,142 @@
 # mnr-logger
 
-Opinionated wrapper around [winston](https://www.npmjs.com/package/winston) logging library.
-
-
-
+Opinionated logger for Node.js
 
 ## You may not need it!
 
-This is a custom highly opinionated solution aimed at code reuse for a few private projects. You'd be better off using [winston](https://www.npmjs.com/package/winston) directly.
-
-
-
-
+This is a highly opinionated solution aimed at code reuse for a few private projects. You'd be better off using something popular, like [winston](https://www.npmjs.com/package/winston) and friends.
 
 ## Installation
 
 ```bash
-$ npm install mnr-logger --save
+$ npm install --save mnr-logger
 ```
-
-
-
-
 
 ## Usage example
 
 ```javascript
+const mnrLogger = require('mnr-logger');
+
+const logger = mnrLogger({
+  appName: 'my-cool-app',
+  deploymentEnv: 'production'
+});
+
+const ERR = new Error('something went wrong');
+
+logger.error(ERR, { transactionId: '12345' });
+logger.warn(ERR, { transactionId: '12345' });
+logger.info('take a look at foo stuff', { transactionId: '12345' });
+```
+
+## What It Does
+
+mnr-logger sends log messages to stderr (for `error` method), or stdout (for `warn` and `info` methods).
+
+When `process.env.NODE_ENV !== 'production'`, mnr-logger logs directly to stdout/stderr without any care how many lines it occupies. This is for development mode.
+
+When `process.env.NODE_ENV === 'production'`, mnr-logger creates a POJO with all the pieces of information it has received, then JSON.stringifies it, and sends to stdout/stderr a single line of text. This allows to treat every single line in your logs storage as one logging item and automate processing. After JSON.parsing this string, you'll get a POJO of the following form:
+
+* `{ISO Date string} timestamp` - Timestamp of the moment mnr-logger received the message.
+
+* `{String} appName` - Application name that mnr-logger was initialized with.
+
+* `{String} deploymentEnv` - Application deployment environment label that mnr-logger was initialized with.
+
+* `{String} level` - "error" for `error()` method; "warn" for `warn()` method; "info" for `info()` method.
+
+* `{String} error` - JSON.stringified `Error` object that was sent to `error()` or `warn()` methods. You can JSON.parse it further to get a pretty formatted representation of the error.
+
+* `{Any} meta` - Additional information that was sent to the logger (which defaults to an empty object).
+
+* `{String} message` - Message passed to `info()` method.
+
+
+## API Reference
+
+### `mnrLogger(opts: object)`
+
+Create a logger instance. You can create as many logger instances as you need in your app.
+
+* `{String} opts.appName` - [optional] Application name tag. Defaults to an empty string
+
+* `{String} deploymentEnv` - [optional] Application deployment environment tag. Defaults to an empty string
+
+Returns logger instance with `error`, `warn`, and `info` methods.
+
+
+### `logger.error(error, [meta])`
+
+Logs an error (with some meta data) into stderr.
+
+Parameters:
+
+* `{Error} error` - Error to log
+
+* `{Any} [meta]` - Any JSON-serializable data. Defaults to an empty object.
+
+
+### `logger.warn(error, [meta])`
+
+Logs an error (with some meta data) into stdout.
+
+Parameters:
+
+* `{Error} error` - Error to log
+
+* `{Any} [meta]` - Any JSON-serializable data. Defaults to an empty object.
+
+
+## `logger.info(message, [meta])`
+
+Logs an arbitrary text message (with some meta data) into stderr.
+
+Parameters:
+
+* `{String} message`
+
+* `{Any} [meta]` - Any JSON-serializable data. Defaults to an empty object.
+
+
+## Test Stubs
+
+`mnrLogger` exposes a static factory function `createStubs()` aimed at helping with logger stubbing in tests. The function returns an object with properties `error`, `warn`, and `info`, each of which is a `sinon` spy.
+
+```javascript
+const test = require('tape');
+const proxyquire = require('proxyquire');
+const createLoggerStubs = require('mnr-logger').createStubs;
+
+const getSelf = ({ loggerStub }) => proxyquire('../my-module', {
+  '../../modules/logger': loggerStub
+});
+
+test('test description', t => {
+  const stubs = {
+    loggerStub: createLoggerStubs()
+  };
+  const self = getSelf(stubs);
+
+  self();
+
+  t.equal(
+    stubs.loggerStub.error.called,
+    true,
+    'should log error'
+  );
+
+  t.equal(
+    stubs.loggerStub.warn.called,
+    true,
+    'should log warning'
+  );
+
+  t.equal(
+    stubs.loggerStub.info.called,
+    true,
+    'should log info message'
+  );
+
+  t.end();
+});
 ```
