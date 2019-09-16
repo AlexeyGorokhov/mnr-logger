@@ -1,6 +1,6 @@
 {
   "name": "mnr-logger",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "description": "Opinionated logger for Node.js",
   "main": "index.js",
   "engines": {
