@@ -137,7 +137,7 @@ function createLogItem (opts) {
       deploymentEnv: _deploymentEnv,
       level,
       meta,
-      ...(error ? { error: JSON.stringify(util.inspect(error)) } : {}),
+      ...(error ? { error: JSON.stringify(util.inspect(error, { depth: null })) } : {}),
       ...(message ? { message } : {})
     });
   } else {
