@@ -1,6 +1,6 @@
 {
   "name": "mnr-logger",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Opinionated logger for Node.js",
   "main": "index.js",
   "engines": {
@@ -16,10 +16,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "sinon": "^6.1.5"
+    "sinon": "^7.4.2"
   },
   "devDependencies": {
-    "semistandard": "^12.0.0",
+    "semistandard": "^14.2.0",
     "snazzy": "^8.0.0",
     "verror": "^1.10.0"
   },
