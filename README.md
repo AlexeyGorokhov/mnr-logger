@@ -89,7 +89,7 @@ Parameters:
 
 ## `logger.info(message, [meta])`
 
-Logs an arbitrary text message (with some meta data) into stderr.
+Logs an arbitrary text message (with some meta data) into stdout.
 
 Parameters:
 
