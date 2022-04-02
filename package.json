@@ -3,26 +3,18 @@
   "version": "0.0.0",
   "description": "Opinionated logger for Node.js",
   "main": "index.js",
+  "types": "index.d.ts",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=16.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/semistandard --verbose | ./node_modules/.bin/snazzy"
+    "test": "eslint ./"
   },
   "author": {
     "name": "Alexey Gorokhov",
-    "email": "alexey.gorokhov@icloud.com",
-    "url": ""
+    "email": "alexey.gorokhov@icloud.com"
   },
   "license": "MIT",
-  "dependencies": {
-    "sinon": "^7.4.2"
-  },
-  "devDependencies": {
-    "semistandard": "^14.2.0",
-    "snazzy": "^8.0.0",
-    "verror": "^1.10.0"
-  },
   "keywords": [
     "logger"
   ],
@@ -33,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/AlexeyGorokhov/mnr-logger/issues"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0"
   }
 }
