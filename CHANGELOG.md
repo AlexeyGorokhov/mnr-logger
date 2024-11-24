@@ -9,12 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.0] - 2024-00-00
 
-### Added
-
 ### Changed
 
 - [BREAKING] From v3, `mnr-logger` is an ESM-only module - you are not able to import it with `require()`.
 - [BREAKING] Minimum Node.js version supported is now v20.
 - [BREAKING] Change type of `meta` parameter from `any` to `unknown`.
-
-### Fixed
