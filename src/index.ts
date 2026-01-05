@@ -148,10 +148,10 @@ function createLogItem(opts: LogItemOptions): string | string[] {
         ? ['\n', opts.message]
         : [],
       ...'error' in opts
-        ? ['\n', JSON.stringify(util.inspect(opts.error, { depth: null }))]
+        ? ['\n', util.inspect(opts.error, { depth: null })]
         : [],
       ...opts.meta
-        ? ['\n', JSON.stringify(opts.meta)]
+        ? ['\n', util.inspect(opts.meta)]
         : [],
       '\n',
     ];
