@@ -3,8 +3,7 @@
   "version": "3.0.0",
   "description": "Opinionated logger for Node.js",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": "./dist/index.js",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -12,7 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "eslint ./ && npm run tsc && jest ./test",
+    "test": "eslint ./ && npm run tsc && vitest run",
     "tsc": "tsc --noEmit",
     "build": "rm -rf dist && tsc -p tsconfig-build.json && api-extractor run --local --verbose"
   },
@@ -32,36 +31,15 @@
   "bugs": {
     "url": "https://github.com/AlexeyGorokhov/mnr-logger/issues"
   },
-  "jest": {
-    "verbose": false,
-    "coverageDirectory": "coverage",
-    "transform": {
-      "^.+\\.(ts|js)$": [
-        "<rootDir>/node_modules/ts-jest",
-        {
-          "useESM": true
-        }
-      ]
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "extensionsToTreatAsEsm": [
-      ".ts"
-    ],
-    "moduleNameMapper": {
-      "^(\\.{1,2}/.*)\\.js$": "$1"
-    }
-  },
   "devDependencies": {
-    "@memnrev/eslint-v9-config": "^0.1.1",
+    "@memnrev/eslint-v9-config": "^0.4.0",
     "@microsoft/api-extractor": "^7.48.0",
+    "@peassoft/verror": "^1.0.0",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.9.3",
+    "@types/node": "^24.10.4",
     "eslint": "^9.8.0",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
-    "typescript": "^5.6.0"
+    "tsx": "^4.21.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.0.16"
   }
 }

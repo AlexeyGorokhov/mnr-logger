@@ -1,3 +1,5 @@
+import { describe, test, expect } from 'vitest';
+
 import mnrLogger from '../src/index.js';
 
 describe('initializing the logger instance', () => {
@@ -6,7 +8,7 @@ describe('initializing the logger instance', () => {
     deploymentEnv: 'baz',
   });
 
-  it('should create an instance of logger', () => {
+  test('should create an instance of logger', () => {
     expect(logger).toBeDefined();
   });
 });
